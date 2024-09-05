@@ -1,59 +1,29 @@
-// index.js
 import "./styles.css";
-import loadHabitPage from "./loadHabitPage.js";
-import {
-  storeNewHabitData,
-  checkHabitCompletion,
-} from "./storeNewHabitData.js";
-import fillLocalStorage from "./fillLocalStorage.js";
-import loadUHSPage from "./loadUHSPage.js";
-import loadStatsPage from "./loadStatsPage.js";
-import loadHomePage from "./loadHomePage.js";
-// kreator habitow
-// dodawanie habitow do routines
-// importowanie habitow i rutyn do kalendarza
+import icon from './images/dropdown.svg';
+import { dropdownControll } from "./greeting";
+const dropdownIcon = icon;
 
-function main() {
-  const content = document.getElementById("main_content");
-  fillLocalStorage();
 
-  // remove html and style for the content div
-  function cleanContent() {
-    const styleSheet = document.getElementById("dynamicStyles");
-    if (styleSheet) {
-      styleSheet.remove();
-    }
-    content.innerHTML = "";
+// Dynamiczny styl w JS
+const styles = `
+  .dropbtn {
+    background-color: #444;
+    border: none;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    background-image: url('${dropdownIcon}');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 2rem;
   }
+`;
 
-  const newHabit = document.getElementById("new-habit");
-  newHabit.addEventListener("click", () => {
-    cleanContent();
-    loadHabitPage();
-    storeNewHabitData();
-  });
+// Dodaj style do dokumentu
+const styleSheet = document.createElement("style");
+styleSheet.id = "dynamicStyles";
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
 
-  const newRoutine = document.getElementById("update");
-  newRoutine.addEventListener("click", () => {
-    cleanContent();
-    loadUHSPage();
-    checkHabitCompletion();
-  });
-
-  const stats = document.getElementById("statistics");
-  stats.addEventListener("click", () => {
-    cleanContent();
-    loadStatsPage();
-  });
-
-  const home = document.getElementById("home");
-  home.addEventListener("click", () => {
-    cleanContent();
-    loadHomePage();
-  });
-}
-
-main();
-loadHomePage();
-// localStorage.clear();
-console.log(localStorage);
+dropdownControll();

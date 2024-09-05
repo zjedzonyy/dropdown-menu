@@ -1,8 +1,12 @@
-// webpack.config.js
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default {
   mode: "development",
   entry: "./src/index.js",
   output: {
@@ -26,8 +30,8 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpg|gif|webp|svg)$/i, // Obsługuje pliki obrazów
-        type: "asset/resource", // Używa Webpack Asset Modules
+        test: /\.(png|jpg|gif|webp|svg)$/i,
+        type: "asset/resource",
       },
     ],
   },
